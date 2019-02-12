@@ -13,14 +13,14 @@ import java.util.Date;
 /**
  * Created by wyd on 2019/1/31 19:15:02.
  */
-public class ServerHandler implements Runnable {
+public class ProServerHandler implements Runnable {
     
     private Socket socket;
     
-    public ServerHandler() {
+    public ProServerHandler() {
     }
     
-    public ServerHandler(Socket socket) {
+    public ProServerHandler(Socket socket) {
         this.socket = socket;
     }
     
