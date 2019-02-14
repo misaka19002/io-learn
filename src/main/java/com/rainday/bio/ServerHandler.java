@@ -55,10 +55,8 @@ public class ServerHandler implements Runnable {
                  * 1.获取请求内容长度
                  */
                 if (requestHeader.startsWith("Content-Length")) {
-                    int begin = requestHeader.indexOf("Content-Lengh:") + "Content-Length:".length();
-                    String postParamterLength = requestHeader.substring(begin).trim();
-                    contentLength = Integer.parseInt(postParamterLength);
-                    System.out.println("POST参数长度是：" + Integer.parseInt(postParamterLength));
+                    contentLength = Integer.parseInt(requestHeader.split(":")[1].trim());
+                    System.out.println("POST参数长度是：" + contentLength);
                 }
             }
             StringBuffer sb = new StringBuffer();
@@ -81,13 +79,13 @@ public class ServerHandler implements Runnable {
             writer.println("<body>");
             writer.println("<h1>访问成功！:</h1>" + new Date());
             Thread current = Thread.currentThread();
-            
+
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-    
+
             writer.println("<h1>thread:" + current.getName() + "  " + current.getId() + "</h1>");
             writer.println("<h1>query:" + queryString + "</h1>");
             writer.println("<h1>body:" + bodyString + "</h1>");

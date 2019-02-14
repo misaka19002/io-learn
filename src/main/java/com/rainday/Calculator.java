@@ -2,7 +2,6 @@ package com.rainday;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 
 /**
  * Created by wyd on 2019/2/12 13:24:09.
@@ -14,8 +13,8 @@ public final class Calculator {
     public static Object cal(String expression) {
         try {
             return jse.eval(expression);
-        } catch (ScriptException e) {
-            return "";
+        } catch (Exception e) {
+            return "0";
         }
     }
 }
