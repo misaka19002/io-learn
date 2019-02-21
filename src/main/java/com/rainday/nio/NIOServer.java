@@ -110,12 +110,17 @@ public class NIOServer {
         if (socketChannel != null) {
             socketChannel.configureBlocking(false);
             //将该socketchannel注册到selector
-            socketChannel.register(selector, SelectionKey.OP_READ);
+            SelectionKey sktmp = socketChannel.register(selector, SelectionKey.OP_READ);
+            
         }
     }
     
     public void read(SelectionKey sk) throws IOException {
         SocketChannel socketChannel = (SocketChannel) sk.channel();
+        //todo 不知道为啥要cancel
+        sk.cancel();
+        socketChannel.configureBlocking(false);
+        
         String temp = null;
         StringBuilder sb = new StringBuilder();
         int len = 0;
@@ -158,6 +163,7 @@ public class NIOServer {
         //将缓冲区的字节数组写入到通道中
         SocketChannel socketChannel = (SocketChannel) sk.channel();
         socketChannel.write(writeBuffer);
+        
         //关闭channcel
         sk.cancel();
         socketChannel.close();
